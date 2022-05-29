@@ -17,7 +17,7 @@ dataset = pd.read_csv('Restaurant_Reviews.tsv', delimiter = '\t', quoting = 3)
 #First cleaning is applied to the first record only
 import re   #library used in cleaning
 review = re.sub('[^a-zA-Z]',' ',dataset['Review'][0]) #.. removing letters other than a to z
-review = review.lower()  # at this stage Review is availbel in the form of a string
+review = review.lower()  # at this stage Review is availble in the form of a string
 #remove non significant words
 import nltk
 # nltk.download('stopwords')
@@ -69,7 +69,7 @@ for i in range(1,1000):
 from sklearn.feature_extraction.text import CountVectorizer
 cv = CountVectorizer(max_features = 1500)
 X10 = cv.fit_transform(corpus)
-print(cv.get_feature_names())
+# print(cv.get_feature_names())
 X1 = X10.toarray()
 
 y = dataset.iloc[:, 1].values
@@ -90,11 +90,11 @@ y_pred = classifier.predict(X_test)
 
 from sklearn.metrics import confusion_matrix, accuracy_score
 cm = confusion_matrix(y_test, y_pred)
-print(cm)
+print('Confusion Matrix: \n', cm)
 acc_cm =(cm[0,0]+cm[1,1])/(cm[0,0]+cm[0,1]+cm[1,0]+cm[1,1])
-print(acc_cm)
+print('Accuracy of the model based on confusion matrix: ', acc_cm)
 acc_score1 = accuracy_score(y_test, y_pred)
-print(acc_score1)
+print('Accuracy score of the model: ', acc_score1)
 
 
 
