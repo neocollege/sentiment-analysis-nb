@@ -1,16 +1,16 @@
 ## analysing text, to predict whether the rest review is positive or not
 
-# This is a good example of supervised learning..
+#supervised learning..
 
-import numpy as np
-import matplotlib.pyplot as plt
+# import numpy as np
+# import matplotlib.pyplot as plt
 import pandas as pd
 
 #importing dataset
 dataset = pd.read_csv('Restaurant_Reviews.tsv', delimiter = '\t', quoting = 3)
 
 #Cleaning the texts .. remove stopwords etc, stemming.. similar words like love or loved
-# maks all in small letters
+# makes all in small letters
 # sparse matrix
 #Bag of words basis
 
@@ -20,7 +20,7 @@ review = re.sub('[^a-zA-Z]',' ',dataset['Review'][0]) #.. removing letters other
 review = review.lower()  # at this stage Review is availbel in the form of a string
 #remove non significant words
 import nltk
-nltk.download('stopwords')
+# nltk.download('stopwords')
 from nltk.corpus import stopwords
 review = review.split()  # the split finction converts the string into list
 review = [word for word in review if not word in set(stopwords.words('english'))]
@@ -40,7 +40,7 @@ review = ' '.join(review) # list is converted back to string
 
 corpus = []
 corpus.append(review) # string is put back into a list (as a combined string)
-
+# print(len(corpus))
 ##---------------------------------
 #Now the above cleaning is applied to all the remaning records from index 1 to 999
 
@@ -56,10 +56,9 @@ for i in range(1,1000):
         review1 = ml1
     review1 = ' '.join(review1)
     corpus.append(review1)
-
 ##-----------------------------------
 #  To create a bag of words model
-#  it is same as creating a spaarse matrix through the process of tokenisation
+#  it is same as creating a sparse matrix through the process of tokenisation
 # ie to create a separate column for each of the word
 # so finally what we get is a review, column for each word and its frequency
 # The sparse matrix would essentially contain all the required features / feature matrix
@@ -73,7 +72,6 @@ X10 = cv.fit_transform(corpus)
 print(cv.get_feature_names())
 X1 = X10.toarray()
 
-#y = dataset.iloc[:, 1].values
 y = dataset.iloc[:, 1].values
 ##-----------------------------------
 # Splitting the dataset into the Training set and Test set
@@ -139,6 +137,3 @@ else:
     print("The customer feedback is negative")
 
 corpus_copy = []
-
-
-
