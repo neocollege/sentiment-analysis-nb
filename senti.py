@@ -3,9 +3,9 @@
 #supervised learning..
 
 # import numpy as np
-# import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 import pandas as pd
-
+# import streamlit as st
 #importing dataset
 dataset = pd.read_csv('Restaurant_Reviews.tsv', delimiter = '\t', quoting = 3)
 
@@ -82,6 +82,11 @@ X_train, X_test, y_train, y_test = train_test_split(X1, y, test_size = 0.20, ran
 from sklearn.naive_bayes import GaussianNB
 classifier = GaussianNB()
 classifier.fit(X_train, y_train)
+# plt.hist(X_train)
+plt.hist(y_train, label='positive (1) and negative (0)')
+plt.legend()
+plt.show()
+
 
 # Predicting the Test set results
 y_pred = classifier.predict(X_test)
@@ -102,6 +107,7 @@ print('Accuracy score of the model: ', acc_score1)
 #classifying the sehensence entered by the user based on the above model
 
 userinput = input("Enter your input :     ")
+# userinput = st.text_area("Enter your input :     ")
 
 review2 = re.sub('[^a-zA-Z]',' ',userinput) #.. removing letters other than a to z
 review2 = review2.lower()
